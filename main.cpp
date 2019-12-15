@@ -59,7 +59,7 @@ string translate(Token t) {
         case error: return "error token\n"; break;
         case eof: return "eof token"; break;
         case newline: return "\n"; break;
-        case terminal: return "terminal token\n"; break;
+        case terminal: return "terminal token"; break;
     }
     return "bad token";
 }
@@ -148,7 +148,7 @@ class Parser {
                 get_token();
             }
             else {
-                cout << "error\n";
+                cout << "Error: Expected token: " << translate(t) << ". Given token: " << translate(curr_token.first) << "\n";
                 exit(-1);
             }
         }
@@ -258,13 +258,6 @@ class Parser {
             }
         }
 };
-
-bool compilable(const deque<pair<Token, string>>& v) {
-    for (const auto& e : v) {
-        if(e.first==Token(error)) return false;
-    }
-    return true;
-}
 
 int main() {
     string filename = "testfile.txt";
